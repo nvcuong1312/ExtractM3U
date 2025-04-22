@@ -16,8 +16,8 @@ function love.load()
     Font.Load()
     Keyboard:create()
 
-    -- local searchCmd = "wget .. " .. Config.FILE_URL .. " .. -O data/fileData"
-    -- os.execute(searchCmd)
+    local searchCmd = "wget .. " .. Config.FILE_URL .. " .. -O data/fileData"
+    os.execute(searchCmd)
 
     local file = io.open("data/fileData", "r")
     if file then
