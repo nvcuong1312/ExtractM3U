@@ -5,7 +5,7 @@
 echo app >/tmp/act_go
 
 # Define paths and commands
-LOVEDIR="$(GET_VAR "device" "storage/rom/mount")/MUOS/application/ExtractM3U"
+LOVEDIR="$(GET_VAR "device" "storage/rom/mount")/MUOS/application/IPTVCutter"
 GPTOKEYB="$(GET_VAR "device" "storage/rom/mount")/MUOS/emulator/gptokeyb/gptokeyb2.armhf"
 BINDIR="$LOVEDIR/bin"
 
