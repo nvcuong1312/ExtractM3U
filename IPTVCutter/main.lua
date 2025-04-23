@@ -194,6 +194,18 @@ function OnKeyPress(key)
                 function(idx) cIdx = idx end,
                 function(page) cPage = page end)
         end
+
+        if key == "left" then
+            GridKeyLeft(downloadedData, cPage, cIdx, Config.GRID_PAGE_ITEM,
+                function(idx) cIdx = idx end,
+                function(page) cPage = page end)
+        end
+
+        if key == "right" then
+            GridKeyRight(downloadedData, cPage, cIdx, Config.GRID_PAGE_ITEM,
+                function(idx) cIdx = idx end,
+                function(page) cPage = page end)
+        end
     end
 end
 
@@ -270,6 +282,50 @@ function GridKeyDown(list, currPage, idxCurr, maxPageItem, callBackSetIdx, callB
         if idxCurr < total then
             callBackSetIdx(idxCurr + 1)
         else
+            callBackSetIdx(1)
+        end
+    end
+end
+
+function GridKeyLeft(list, currPage, idxCurr, maxPageItem, callBackSetIdx, callBackChangeCurrPage)
+    local total = table.getn(list)
+    if total < 1 or total == 1 then return end
+    local isMultiplePage = total > maxPageItem
+    if isMultiplePage then
+        local remainder = total % maxPageItem
+        local totalPage = 1
+        local q, _ = math.modf(total / maxPageItem)
+        if remainder > 0 then
+            totalPage =  q + 1
+        else
+            totalPage = q
+            remainder = maxPageItem
+        end
+
+        if currPage > 1 then
+            callBackChangeCurrPage(currPage - 1)
+            callBackSetIdx(1)
+        end
+    end
+end
+
+function GridKeyRight(list, currPage, idxCurr, maxPageItem, callBackSetIdx, callBackChangeCurrPage)
+    local total = table.getn(list)
+    if total < 1 or total == 1 then return end
+    local isMultiplePage = total > maxPageItem
+    if isMultiplePage then
+        local remainder = total % maxPageItem
+        local totalPage = 1
+        local q, _ = math.modf(total / maxPageItem)
+        if remainder > 0 then
+            totalPage =  q + 1
+        else
+            totalPage = q
+            remainder = maxPageItem
+        end
+
+        if currPage < totalPage then
+            callBackChangeCurrPage(currPage + 1)
             callBackSetIdx(1)
         end
     end
